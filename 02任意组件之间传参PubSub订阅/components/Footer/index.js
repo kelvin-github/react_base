@@ -8,7 +8,12 @@ export default class Footer extends Component {
 
     // 放在 挂载成功后
     componentDidMount() {
-        PubSub.subscribe("myTopic", this.mySubscriber)
+        this.myTopic = PubSub.subscribe("myTopic", this.mySubscriber)
+    }
+
+    // 卸载挂载时 取消订阅
+    componentWillUnmount() {
+        PubSub.unsubscribe(this.myTopic)
     }
 
     render() {
